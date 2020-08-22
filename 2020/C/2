@@ -1,0 +1,29 @@
+t = int(input())
+
+for i in range(t):
+    n = int(input())
+    sums = []
+    nums = list(map(int, input().split()))
+    maxnum = max(nums)
+    ps = []
+    cnum = 0
+    csquare = 0
+    while csquare <= maxnum*n:
+        csquare = cnum*cnum
+        ps.append(csquare)
+        cnum += 1
+    totals = {}
+    totals[0] = 1
+    perfectsubarrays = 0;
+    total = 0
+    for n in nums:
+        total += n
+        for square in ps:
+            remainder = total-square
+            if remainder in totals:
+                perfectsubarrays += totals[remainder]
+        if total not in totals:
+            totals[total] = 0 
+        totals[total] += 1
+
+    print("Case #"+str(i+1)+": "+str(perfectsubarrays))
